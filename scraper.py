@@ -25,7 +25,7 @@ while(len(urls)>0):
         newrls=[e.get("href") for e in root1.cssselect("a")]
         urls=urls+newrls
         print(str(len(newrls))+" new urls")
-        scraperwiki.sqlite.save(unique_keys=["link"], data={"link": urls[0], "body":html1 })
+        scraperwiki.sqlite.save(unique_keys=["link"], data={"link": urls[0], "body":html1.encode('utf-8') })
         urls.pop(0)
         
  

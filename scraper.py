@@ -11,9 +11,11 @@ html = scraperwiki.scrape(url)
 # # Find something on the page using css selectors
 root = lxml.html.fromstring(html)
 urls=[e.get("href") for e in root.cssselect("a")]
+nour=set(url)
 while(len(urls)>0):
-  if url in urls[0] and urls[0]!=url:
+  if url in urls[0] and urls[0] not in nour:
     ur=urls[0]
+    nour.add(ur)
     print("scraping: "+ur)
     html1= scraperwiki.scrape(ur)
     root1 = lxml.html.fromstring(html1)

@@ -10,17 +10,23 @@ html = scraperwiki.scrape(url)
 #
 # # Find something on the page using css selectors
 root = lxml.html.fromstring(html)
-urls=[e.get("href") for e in root.cssselect("a")]
+urlss=[e.get("href") for e in root.cssselect("a")]
+urls=[]
+for k in urlss:
+    if url in k:
+        urls.append(k)
 nour=set(url)
 while(len(urls)>0):
-    print("scraping: "+urls[0])
-    html1= scraperwiki.scrape(urls[0])
-    root1 = lxml.html.fromstring(html1)
-    newrls=[e.get("href") for e in root1.cssselect("a")]
-    urls=urls+newrls
-    print(str(len(newrls))+" new urls")
-    scraperwiki.sqlite.save(unique_keys=[urls[0]], data={"link": urls[0], "body":html1 })
-    urls.pop(0)
+    if urls[0] not in nour:
+        print("scraping: "+urls[0])
+        nour.add(urls[0])
+        html1= scraperwiki.scrape(urls[0])
+        root1 = lxml.html.fromstring(html1)
+        newrls=[e.get("href") for e in root1.cssselect("a")]
+        urls=urls+newrls
+        print(str(len(newrls))+" new urls")
+        scraperwiki.sqlite.save(unique_keys=[urls[0]], data={"link": urls[0], "body":html1 })
+        urls.pop(0)
         
  
         

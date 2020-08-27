@@ -15,11 +15,12 @@ urls=[]
 for k in urlss:
     if url in k:
         urls.append(k)
-nour=set(url)
+nlist=set()
+nlist.add(url)
 while(len(urls)>0):
-    if urls[0] not in nour:
+    if urls[0] not in nlist:
         print("scraping: "+urls[0])
-        nour.add(urls[0])
+        nlist.add(urls[0])
         html1= scraperwiki.scrape(urls[0])
         root1 = lxml.html.fromstring(html1)
         newrls=[e.get("href") for e in root1.cssselect("a")]

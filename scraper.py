@@ -13,25 +13,15 @@ root = lxml.html.fromstring(html)
 urls=[e.get("href") for e in root.cssselect("a")]
 nour=set(url)
 while(len(urls)>0):
-  if url in urls[0] and urls[0] not in nour:
-    ur=urls[0]
-    nour.add(ur)
-    print("scraping: "+ur)
-    html1= scraperwiki.scrape(ur)
+    print("scraping: "+urls[0])
+    html1= scraperwiki.scrape(urls[0])
     root1 = lxml.html.fromstring(html1)
-    urls.pop(0)
     newrls=[e.get("href") for e in root1.cssselect("a")]
     urls=urls+newrls
-    print(str(len(newrls)))
-    try:
-      if root1.cssselect("div[class='blog-col']"):
-        scraperwiki.sqlite.save(unique_keys=[ur], data={"link": ur, "blog":root1.cssselect("div[class='blog-col']") })
-        print("got a blog!")
-      else:
-        print("no article for this link")
-        pass
-    except:pass
-  else:pass
+    print(str(len(newrls))+" new urls"
+    scraperwiki.sqlite.save(unique_keys=[urls[0]], data={"link": ur, "body":html1 })
+        
+ 
         
     
   

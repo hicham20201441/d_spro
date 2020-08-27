@@ -18,7 +18,7 @@ while(len(urls)>0):
     root1 = lxml.html.fromstring(html1)
     newrls=[e.get("href") for e in root1.cssselect("a")]
     urls=urls+newrls
-    print(str(len(newrls))+" new urls"
+    print(str(len(newrls))+" new urls")
     scraperwiki.sqlite.save(unique_keys=[urls[0]], data={"link": ur, "body":html1 })
         
  

@@ -29,7 +29,7 @@ while(len(urls)>0):
         else:
           print("no article for this link")
           pass
-      except:pass
+     except:pass
   else:pass
         
     

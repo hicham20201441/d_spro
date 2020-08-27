@@ -10,7 +10,8 @@ html = scraperwiki.scrape("https://dollarsprout.com")
 # # Find something on the page using css selectors
 root = lxml.html.fromstring(html)
 for e in root.cssselect("a"):
-  scraperwiki.sqlite.save(unique_keys=[e.get("href")], data={"link": e.get("href")})
+  print(e)
+  #scraperwiki.sqlite.save(unique_keys=[e.get("href")], data={"link": e.get("href")})
 
 #root.cssselect("div[class='blog-col']")
 #

@@ -22,6 +22,14 @@ while(len(urls)>0):
     urls=urls+newrls
     print(str(len(newrls)))
     print(root1.cssselect("div[class='blog-col']")
+    try:
+      if root1.cssselect("div[class='blog-col']"):
+        scraperwiki.sqlite.save(unique_keys=[ur], data={"link": ur, "blog":root1.cssselect("div[class='blog-col']") })
+        print("got a blog!")
+      else:
+        print("no article for this link")
+        pass
+    except:pass
   else:pass
         
     
